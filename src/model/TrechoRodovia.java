@@ -4,11 +4,13 @@ public class TrechoRodovia implements MonitoravelViaIoT {
     private double quilometroInicial;
     private double quilometroFinal;
     private double nivelVegetacaoCm;
+    private String tipoClima;
 
-    public TrechoRodovia(double quilometroInicial, double quilometroFinal, double nivelVegetacaoCm) {
+    public TrechoRodovia(double quilometroInicial, double quilometroFinal, double nivelVegetacaoCm,String tipoClima) {
         this.setQuilometroInicial(quilometroInicial);
         this.setQuilometroFinal(quilometroFinal);
         this.setNivelVegetacaoCm(nivelVegetacaoCm);
+        this.setTipoClima(tipoClima);
         System.out.println("Trecho rodovia: Km inicial:"+ this.quilometroInicial + "km | Quilometro final:"+ this.quilometroFinal + "km | Nivel de vegetacao:"+ this.nivelVegetacaoCm + "cm");
     }
 
@@ -24,6 +26,10 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         return nivelVegetacaoCm;
     }
 
+    public String getTipoClima(){
+        return tipoClima;
+    }
+
 
     public void registrarCrescimento(double taxa){
         if(taxa>0){
@@ -32,6 +38,15 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         }else {
             throw new IllegalArgumentException("A taxa nao pode ser 0 ou menor");
         }
+    }
+
+    public void regristrarCrescimentoAutomatico(){
+        if(tipoClima.equalsIgnoreCase("umido")){
+            nivelVegetacaoCm += 10;
+        }else {
+            nivelVegetacaoCm += 4;
+        }
+        System.out.println("Crescimento automatico registrado. Nivel atual:  " + nivelVegetacaoCm);
     }
 
     @Override
@@ -69,10 +84,18 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         }
     }
 
+    public void setTipoClima(String tipoClima){
+        if(tipoClima.equalsIgnoreCase("umido") || tipoClima.equalsIgnoreCase("seco")){
+            this.tipoClima = tipoClima;
+        }else {
+            throw new IllegalArgumentException("O tipo de clima deve ser 'umido' ou 'seco'");
+        }
+    }
+
     @Override
     public String toString() {
         return "Trecho KM " + quilometroInicial + " ao " + quilometroFinal +
-                " | Vegetação: " + nivelVegetacaoCm + " cm";
+                " | Vegetação: " + nivelVegetacaoCm + " cm | Clima: " + tipoClima;
     }
 
 }
