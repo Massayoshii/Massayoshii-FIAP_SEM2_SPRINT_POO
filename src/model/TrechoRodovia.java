@@ -11,7 +11,7 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         this.setQuilometroFinal(quilometroFinal);
         this.setNivelVegetacaoCm(nivelVegetacaoCm);
         this.setTipoClima(tipoClima);
-        System.out.println("Trecho rodovia: Km inicial:"+ this.quilometroInicial + "km | Quilometro final:"+ this.quilometroFinal + "km | Nivel de vegetacao:"+ this.nivelVegetacaoCm + "cm");
+        System.out.println("\nTrecho rodovia: Km inicial:"+ this.quilometroInicial + "km | Quilometro final:"+ this.quilometroFinal + "km | Nivel de vegetacao:"+ this.nivelVegetacaoCm + "cm");
     }
 
     public double getQuilometroInicial() {
@@ -34,9 +34,9 @@ public class TrechoRodovia implements MonitoravelViaIoT {
     public void registrarCrescimento(double taxa){
         if(taxa>0){
             nivelVegetacaoCm += taxa;
-            System.out.println("Nivel de vegetacao aumentou para "+ this.nivelVegetacaoCm);
+            System.out.println("\nNivel de vegetacao aumentou para "+ this.nivelVegetacaoCm);
         }else {
-            throw new IllegalArgumentException("A taxa nao pode ser 0 ou menor");
+            throw new IllegalArgumentException("\nA taxa nao pode ser 0 ou menor");
         }
     }
 
@@ -46,7 +46,7 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         }else {
             nivelVegetacaoCm += 4;
         }
-        System.out.println("Crescimento automatico registrado. Nivel atual:  " + nivelVegetacaoCm);
+        System.out.println("\nCrescimento automatico registrado. Nivel atual:  " + nivelVegetacaoCm);
     }
 
     @Override
@@ -54,10 +54,32 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         if (crescimento > 0){
             nivelVegetacaoCm += crescimento;
 
-            System.out.println("Sensor IoT atualizou a vegetacao para " + nivelVegetacaoCm + " cm");
+            System.out.println("\nSensor IoT atualizou a vegetacao para " + nivelVegetacaoCm + " cm");
         }else {
-            throw new IllegalArgumentException("Valor do sensor invalido");
+            throw new IllegalArgumentException("\nValor do sensor invalido");
         }
+    }
+
+    public void gerarRelatiorio(TrechoRodovia [] trechos){
+        System.out.println("\n=== RELATORIO DE PRIORIDADE === ");
+        for (TrechoRodovia trecho : trechos){
+            System.out.println(trecho);
+
+            if(trecho.getNivelVegetacaoCm() >= 25){
+                System.out.println("\nPRIORIDADE ALTA -> Roçada mecanizada");
+
+                IntervencaoOperacional rocada = new RocadaMecanizada();
+                rocada.executarServico();
+            }else if (trecho.getNivelVegetacaoCm() >= 12){
+                System.out.println("\nPRIORIDADE MEDIA -> Pulverizacao");
+                IntervencaoOperacional pulverizacao = new Pulverizacao();
+                pulverizacao.executarServico();
+            }else {
+                System.out.println("\nSem necessidade de intervencao");
+            }
+            System.out.println();
+        }
+
     }
 
     public void setQuilometroInicial(double quilometroInicial) {
