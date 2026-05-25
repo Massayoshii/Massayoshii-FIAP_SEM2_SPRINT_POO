@@ -1,6 +1,6 @@
 package model;
 
-public class TrechoRodovia {
+public class TrechoRodovia implements MonitoravelViaIoT {
     private double quilometroInicial;
     private double quilometroFinal;
     private double nivelVegetacaoCm;
@@ -32,7 +32,17 @@ public class TrechoRodovia {
         }else {
             throw new IllegalArgumentException("A taxa nao pode ser 0 ou menor");
         }
+    }
 
+    @Override
+    public void transmitirDadosSensor(double crescimento) {
+        if (crescimento > 0){
+            nivelVegetacaoCm += crescimento;
+
+            System.out.println("Sensor IoT atualizou a vegetacao para " + nivelVegetacaoCm + " cm");
+        }else {
+            throw new IllegalArgumentException("Valor do sensor invalido");
+        }
     }
 
     public void setQuilometroInicial(double quilometroInicial) {
@@ -64,4 +74,5 @@ public class TrechoRodovia {
         return "Trecho KM " + quilometroInicial + " ao " + quilometroFinal +
                 " | Vegetação: " + nivelVegetacaoCm + " cm";
     }
+
 }
