@@ -40,7 +40,7 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         }
     }
 
-    public void regristrarCrescimentoAutomatico(){
+    public void registrarCrescimentoAutomatico(){
         if(tipoClima.equalsIgnoreCase("umido")){
             nivelVegetacaoCm += 10;
         }else {
