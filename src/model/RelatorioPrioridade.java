@@ -1,6 +1,6 @@
 package model;
 
-public class RelatiorioPrioridade {
+public class RelatorioPrioridade {
     public void gerarRelatiorio(TrechoRodovia [] trechos){
         System.out.println("\n=== RELATORIO DE PRIORIDADE === ");
         for (TrechoRodovia trecho : trechos){
@@ -18,8 +18,6 @@ public class RelatiorioPrioridade {
             }else {
                 System.out.println("\nSem necessidade de intervencao");
             }
-            System.out.println();
         }
-
     }
 }
