@@ -60,27 +60,6 @@ public class TrechoRodovia implements MonitoravelViaIoT {
         }
     }
 
-    public void gerarRelatiorio(TrechoRodovia [] trechos){
-        System.out.println("\n=== RELATORIO DE PRIORIDADE === ");
-        for (TrechoRodovia trecho : trechos){
-            System.out.println(trecho);
-
-            if(trecho.getNivelVegetacaoCm() >= 25){
-                System.out.println("\nPRIORIDADE ALTA -> Roçada mecanizada");
-
-                IntervencaoOperacional rocada = new RocadaMecanizada();
-                rocada.executarServico();
-            }else if (trecho.getNivelVegetacaoCm() >= 12){
-                System.out.println("\nPRIORIDADE MEDIA -> Pulverizacao");
-                IntervencaoOperacional pulverizacao = new Pulverizacao();
-                pulverizacao.executarServico();
-            }else {
-                System.out.println("\nSem necessidade de intervencao");
-            }
-            System.out.println();
-        }
-
-    }
 
     public void setQuilometroInicial(double quilometroInicial) {
         if(quilometroInicial >= 0){
