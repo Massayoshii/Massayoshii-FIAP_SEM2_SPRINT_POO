@@ -1,5 +1,5 @@
 package model;
 
 public interface MonitoravelViaIoT {
-    void transmitirDadosSensor();
+    void transmitirDadosSensor(double crescimento);
 }
